@@ -1,0 +1,21 @@
+install git
+create an empty folder
+
+git init
+
+git remote add origin "https://github.com/k1shor/nagarjuna024_4thsem_backend"
+
+git pull origin master
+
+
+
+for adding code to GitHub
+
+create a repository in GitHub.com
+
+git init
+git add .
+git commit -m "message"
+
+git remote add origin "project's url"
+git push -u origin master
