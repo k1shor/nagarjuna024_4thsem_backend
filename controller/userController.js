@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt')
 const Token = require('../models/TokenModel')
 const crypto = require('crypto')
 const sendMail = require('../middleware/emailSender')
+const jwt = require('jsonwebtoken')
+const {expressjwt} = require('express-jwt')
 
 exports.register = async (req, res) => {
     // check if username is available
@@ -149,7 +151,7 @@ exports.resendVerification = async (req, res) => {
     // send token in email
     // const URL = `http://localhost:5000/verify/${token.token}`
     const URL = `${process.env.FRONTEND_URL}/verify/${token.token}`
-    sendEmail({
+    sendMail({
         from: "no-reply@something.com",
         to: req.body.email,
         subject: "verificiation email",
@@ -236,7 +238,7 @@ exports.requireAdmin = (req, res, next) => {
         if (err) {
             return res.status(401).json({ error: "User not logged in" })
         }
-        else if (req.auth.role !== 1) {
+        else if (req.auth.role !== 0) {
             return res.status(403).json({ error: "Authorization error" })
         }
         else {

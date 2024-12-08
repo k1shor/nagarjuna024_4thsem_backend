@@ -46,7 +46,7 @@ exports.placeOrder = async (req, res) => {
 // get all orders
 exports.getAllOrders = async (req, res) => {
     let orders = await Order.find().populate('user', 'username')
-        .populate({ path: 'orderItems', populate: { path: 'product', populate: 'category' } })
+        .populate({path: 'orderItems', populate: {path: 'product', populate: 'category'}})
     if (!orders) {
         return res.status(400).json({ error: "Something went wrong" })
     }
